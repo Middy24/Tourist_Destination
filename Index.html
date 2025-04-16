@@ -3,197 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Great Zimbabwe - Ancient African Wonder</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>WildTrack Dashboard</title>
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --text-light: #7f8c8d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #f5f7fa;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--light);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--light);
+            border-radius: 3px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: white;
+            display: inline-block;
+        }
+
+        .status.growing {
+            background-color: var(--success);
+        }
+
+        .status.stable {
+            background-color: var(--secondary);
+        }
+
+        .status.declining {
+            background-color: var(--danger);
+        }
+
+        .data-table {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo-container">
-                <img src="https://landportal.org/sites/default/files/2023-05/download_24.png" alt="Great Zimbabwe" class="logo-image">
-                <div class="logo">Great Zimbabwe</div>
+        <div class="header-container">
+            <div class="logo">
+                <span>🐾 WildTrack</span>
             </div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#attractions">Attractions</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#visit">Visit</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
-        <div class="hero">
-            <h1>Discover the Majesty of Great Zimbabwe</h1>
-            <h1>Created by Mildred</h1>
-            <p>Explore the ancient stone city that shaped Southern African history</p>
-            <a href="#visit" class="cta-button">Plan Your Visit</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Dashboard</a></li>
+                    <li><a href="add-record.html">Add Record</a></li>
+                    <li><a href="map.html">Map View</a></li>
+                    
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <section id="about" class="section">
-        <div class="container">
-            <h2>The Ancient Wonder of Africa</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Great Zimbabwe is a medieval city in the south-eastern hills of Zimbabwe near Lake Mutirikwe and the town of Masvingo. It was the capital of the Kingdom of Zimbabwe during the country's Late Iron Age.</p>
-                    <p>Constructed between the 11th and 15th centuries, the city spans 7.22 square kilometers and could have housed up to 18,000 people at its peak. The stone constructions, built without mortar, stand as a testament to the architectural ingenuity of the Shona civilization.</p>
-                    <p>Recognized as a UNESCO World Heritage Site, Great Zimbabwe remains one of Africa's most significant archaeological sites and a source of national pride.</p>
+    <div class="container">
+        <h1>Wildlife Monitoring Dashboard</h1>
+        <p>Track and manage wildlife populations across regions</p>
+        
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Total Species</h2>
+                    <span class="status stable">Live</span>
                 </div>
-                <div class="about-image">
-                    <img src="https://zimbabwetourism.net/wp-content/uploads/2019/03/3d-Great-Zim-1400x933.jpg" alt="Great Zimbabwe ruins">
-                </div>
+                <div class="card-value" id="total-species">15</div>
+                <p>Tracked across all regions</p>
             </div>
-        </div>
-    </section>
-
-    <section id="attractions" class="section dark">
-        <div class="container">
-            <h2>Key Attractions</h2>
-            <div class="attractions-grid">
-                <div class="attractions-grid">
-                    <!-- The Great Enclosure -->
-                    <div class="attraction-card">
-                        <i class="fas fa-archway"></i>
-                        <h3>The Great Enclosure</h3>
-                        <div class="attraction-image-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfz0GawgxwDP1EnTSjjKwZHfdS_CfyXQFMITcz1FQdvrFtiS1T4GQiIEYvaac8NeueaPU&usqp=CAU" alt="The massive stone walls of the Great Enclosure" class="attraction-image">
-                        </div>
-                        <p>The largest ancient structure in sub-Saharan Africa, featuring an impressive 11-meter high wall extending approximately 250 meters.</p>
-                    </div>
-                
-                    <!-- The Hill Complex -->
-                    <div class="attraction-card">
-                        <i class="fas fa-mountain"></i>
-                        <h3>The Hill Complex</h3>
-                        <div class="attraction-image-container">
-                            <img src="images/hill-complex.jpg" alt="Ancient ruins atop the Hill Complex" class="attraction-image">
-                        </div>
-                        <p>The oldest part of Great Zimbabwe, believed to be the spiritual and political center of the kingdom.</p>
-                    </div>
-                
-                    <!-- The Valley Complex -->
-                    <div class="attraction-card">
-                        <i class="fas fa-home"></i>
-                        <h3>The Valley Complex</h3>
-                        <div class="attraction-image-container">
-                            <img src="images/valley-complex.jpg" alt="Ruins in the Valley Complex area" class="attraction-image">
-                        </div>
-                        <p>A series of ruins suggesting this was the main residential area for the city's elite.</p>
-                    </div>
-                
-                    <!-- Zimbabwe Birds -->
-                    <div class="attraction-card">
-                        <i class="fas fa-dove"></i>
-                        <h3>Zimbabwe Birds</h3>
-                        <div class="attraction-image-container">
-                            <img src="images/zimbabwe-birds.jpg" alt="Ancient soapstone carvings of Zimbabwe Birds" class="attraction-image">
-                        </div>
-                        <p>Iconic soapstone carvings that served as emblems of royal authority, now a national symbol.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="gallery" class="section">
-        <div class="container">
-            <h2>Enjoy</h2>
             
-        </div>
-    </section>
-
-    <section id="visit" class="section dark">
-        <div class="container">
-            <h2>Plan Your Visit</h2>
-            <div class="visit-content">
-                <div class="visit-info">
-                    <h3>Visitor Information</h3>
-                    <p><strong>Location:</strong> Near Masvingo, Zimbabwe</p>
-                    <p><strong>Hours:</strong> 8:00 AM - 5:00 PM daily</p>
-                    <p><strong>Entrance Fees:</strong></p>
-                    <ul>
-                        <li>International Visitors: $15</li>
-                        <li>Regional Visitors: $10</li>
-                        <li>Local Visitors: $5</li>
-                    </ul>
-                    <p><strong>Guided Tours:</strong> Available in multiple languages</p>
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Growing Populations</h2>
+                    <span class="status growing">+12%</span>
                 </div>
-                <div class="visit-form">
-                    <h3>Request More Information</h3>
-                    <form id="infoForm">
-                        <div class="form-group">
-                            <input type="text" id="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="cta-button">Send Request</button>
-                    </form>
+                <div class="card-value" id="growing-populations">8</div>
+                <p>Positive trends this month</p>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>At Risk</h2>
+                    <span class="status declining">Alert</span>
                 </div>
+                <div class="card-value" id="at-risk">3</div>
+                <p>Needing conservation</p>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2>Recent Surveys</h2>
+                    <span class="status stable">24</span>
+                </div>
+                <div class="card-value" id="recent-surveys">24</div>
+                <p>Completed this month</p>
             </div>
         </div>
-    </section>
-
-    <section id="testimonials" class="section">
-        <div class="container">
-            <h2>Visitor Testimonials</h2>
-            <div class="testimonials-slider">
-                <div class="testimonial active">
-                    <p>"The scale and craftsmanship of Great Zimbabwe took my breath away. Walking through the ancient walls, I could feel the history surrounding me."</p>
-                    <p class="author">- Sarah K., UK</p>
-                </div>
-                <div class="testimonial">
-                    <p>"Our guide was incredibly knowledgeable and brought the site to life with stories of the Shona people. A must-visit for anyone interested in African history."</p>
-                    <p class="author">- Thomas M., South Africa</p>
-                </div>
-                <div class="testimonial">
-                    <p>"I've visited many ancient sites around the world, and Great Zimbabwe stands out for its unique architecture and peaceful atmosphere."</p>
-                    <p class="author">- Aisha B., Kenya</p>
-                </div>
-                <div class="slider-controls">
-                    <button id="prevTestimonial"><i class="fas fa-chevron-left"></i></button>
-                    <button id="nextTestimonial"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
+        
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Species</th>
+                        <th>Region</th>
+                        <th>Status</th>
+                        <th>Population</th>
+                        <th>Last Survey</th>
+                    </tr>
+                </thead>
+                <tbody id="recent-sightings">
+                    <tr>
+                        <td>African Lion</td>
+                        <td>Serengeti</td>
+                        <td><span class="status stable">Stable</span></td>
+                        <td>1,250</td>
+                        <td>2023-06-15</td>
+                    </tr>
+                    <tr>
+                        <td>African Elephant</td>
+                        <td>Kruger</td>
+                        <td><span class="status growing">Growing</span></td>
+                        <td>3,420</td>
+                        <td>2023-06-12</td>
+                    </tr>
+                    <tr>
+                        <td>Black Rhino</td>
+                        <td>Etosha</td>
+                        <td><span class="status declining">Declining</span></td>
+                        <td>320</td>
+                        <td>2023-06-10</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </section>
-
-    <section id="contact" class="section dark">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <p><i class="fas fa-map-marker-alt"></i> Great Zimbabwe National Monument, Masvingo, Zimbabwe</p>
-                    <p><i class="fas fa-phone"></i> +263 772 123 456</p>
-                    <p><i class="fas fa-envelope"></i> info@greatzimbabwe.org</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3744.046126716783!2d30.93221531538576!3d-20.2678861864541!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ec5d3a5b5a9e5e5%3A0x5e5e5e5e5e5e5e5e!2sGreat%20Zimbabwe%20National%20Monument!5e0!3m2!1sen!2szw!4v1620000000000!5m2!1sen!2szw" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2023 Great Zimbabwe Tourism. All rights reserved.</p>
-            <p>Proudly preserving Zimbabwean heritage for future generations.</p>
-        </div>
+        <p>© 2023 WildTrack Conservation | Wildlife Monitoring System</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // JavaScript for Dashboard Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate loading data from API
+            setTimeout(() => {
+                // Update dashboard metrics
+                document.getElementById('total-species').textContent = '18';
+                document.getElementById('growing-populations').textContent = '11';
+                document.getElementById('at-risk').textContent = '2';
+                document.getElementById('recent-surveys').textContent = '28';
+                
+                // Add click handlers to table rows
+                const rows = document.querySelectorAll('#recent-sightings tr');
+                rows.forEach(row => {
+                    row.addEventListener('click', function() {
+                        // In a real app, this would navigate to detail view
+                        const species = this.cells[0].textContent;
+                        alert(`Showing details for ${species}`);
+                    });
+                });
+            }, 1000);
+            
+            // Simulate real-time updates
+            setInterval(() => {
+                const surveys = document.getElementById('recent-surveys');
+                surveys.textContent = parseInt(surveys.textContent) + 1;
+            }, 30000);
+        });
+
+        // Function to fetch data from JSONBin (example)
+        async function fetchWildlifeData() {
+            try {
+                const response = await fetch('https://api.jsonbin.io/v3/b/YOUR_BIN_ID/latest', {
+                    headers: {
+                        'X-Master-Key': 'YOUR_API_KEY'
+                    }
+                });
+                
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                return data.record?.wildlife || [];
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                return [];
+            }
+        }
+    </script>
 </body>
 </html>
